@@ -1,0 +1,8 @@
+{
+  "name": "Remix Inventario de Instrumentos Programación - 2026",
+  "description": "A web application to manage and track the lending of tools and equipment to teachers from an inventory list, with an AI-powered search.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

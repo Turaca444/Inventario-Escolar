@@ -1,0 +1,37 @@
+
+import type { InventoryItem } from './types';
+
+export const initialInventory: InventoryItem[] = [
+  { id: '23466', name: 'Mouse Inalambrico', description: 'Resolución 1600 dpi', brand: 'Kolke', model: 'KEM - 412', initialStock: 1, currentStock: 1 },
+  { id: '8811', name: 'Mouse Inalambrico', description: 'Resolución 1000 dpi', brand: 'Int.Co', model: 'RDM521W', initialStock: 1, currentStock: 1 },
+  { id: '8251', name: 'Conector OTG', description: 'Tipo C-USB 3.0', brand: 'Int.Co', model: 'CP01-20-006', initialStock: 2, currentStock: 2 },
+  { id: '26563', name: 'Port Hub', description: 'Usb 2.0 4 ports', brand: 'Hi - Speed', model: '', initialStock: 1, currentStock: 1 },
+  { id: 'NM-C98 3', name: 'Cable HDMI', description: 'HD V2.0 - 3 mts', brand: 'NetMark', model: 'ULTRA HD V2.0', initialStock: 1, currentStock: 1 },
+  { id: 'WSR-1129', name: 'Micrófono', description: 'Micrófono Inalámbrico', brand: 'Noga', model: 'NG-M1308', initialStock: 1, currentStock: 1 },
+  { id: '26735', name: 'Pen Drive', description: 'Usb 2.0 Flash Drive 64 Gb', brand: 'ScanDisk Cruzer Blade', model: 'SDC250-064G-B35', initialStock: 5, currentStock: 3 },
+  { id: 'ARDUINO1', name: 'Rfid uno Kit', description: 'Caja Kit Arduino Uno', brand: 'Galnic', model: 'ARID', initialStock: 1, currentStock: 1 },
+  { id: 'RBQOH', name: 'Robobloq - Programable', description: 'Robot de Bloques de aluminio', brand: 'Robobloq', model: 'QOOPERS', initialStock: 1, currentStock: 1 },
+  { id: '25721', name: 'Parlantes', description: 'Potencia 1000/2000 W', brand: 'Marvo', model: 'SG-265', initialStock: 1, currentStock: 1 },
+  { id: 'PROJ004ISO-15857-0154', name: 'TurboCalefactor tipo Split', description: 'Resolución 1280x720 soporte 1080P', brand: 'Liliana', model: 'CW800', initialStock: 2, currentStock: 2 },
+  { id: 'PROJ004ISO-15857-0154-1', name: 'Gadnic Proyector LED', description: '1 Rojo - 1 Azul - 1 Verde', brand: 'Gadnic', model: 'PROYECTOR LCD', initialStock: 1, currentStock: 1 },
+  { id: 'PROJ004ISO-15857-0154-2', name: 'Marcadores (Rojo,Azul,Verde)', description: '1 Negro', brand: 'BIC', model: 'Marking', initialStock: 3, currentStock: 3 },
+  { id: 'PROJ004ISO-15857-0154-3', name: 'Marcador', description: 'Borrador Magnetico para Pizarra Blanca', brand: 'Expo', model: 'Low Odor', initialStock: 1, currentStock: 1 },
+  { id: 'PROJ004ISO-15857-0154-4', name: 'Borrador Magnetico', description: '1 Verde - 1 Rojo 30 ml', brand: 'Ezco', model: 'BP-504', initialStock: 1, currentStock: 1 },
+  { id: 'PROJ004ISO-15857-0154-5', name: 'Tinta de Recarga', description: '1 Azul 30 ml', brand: 'Trabi', model: '', initialStock: 2, currentStock: 2 },
+  { id: 'U63982D3xX680327', name: 'Tinta de Recarga', description: '', brand: 'Pelikan', model: '', initialStock: 1, currentStock: 1 },
+  { id: 'HY-16', name: 'Impresora Laser Monocromática Wireless', description: 'Laser Monocromática Wireless', brand: 'Brother', model: 'HL-1212w', initialStock: 1, currentStock: 1 },
+  { id: 'SD - 9857M', name: 'Kit Destornilladores', description: '16 unidades', brand: 'Proskit', model: 'Plan/PHILL', initialStock: 4, currentStock: 4 },
+  { id: 'HY-150B', name: 'Kit Destornilladores', description: '57 Puntas', brand: 'Proskit', model: 'Ratchet Mechanism', initialStock: 2, currentStock: 2 },
+  { id: 'HY-611-6', name: 'Pelacable', description: 'Pelacable - P/ Cable', brand: 'Network Tool', model: '2 en 1 Stripper and Cutter', initialStock: 3, currentStock: 3 },
+  { id: 'HY-569B', name: 'Pulsera Antiestatica', description: 'Color Celeste', brand: 'Tool', model: '', initialStock: 4, currentStock: 4 },
+  { id: 'HY-376G', name: 'Pinza', description: 'Pinza - Pta Larga 125 mm', brand: 'Tool', model: '', initialStock: 3, currentStock: 3 },
+  { id: 'UT681L', name: 'Crimpeadora', description: 'RJ-9 - RJ-11 RJ-12', brand: 'Uni-T', model: 'UT681L', initialStock: 3, currentStock: 3 },
+  { id: 'UT33D-PLUS/EC', name: 'Tester', description: 'Tester Cables RJ-11/RJ45', brand: 'Unit', model: '', initialStock: 1, currentStock: 1 },
+  { id: 'MALLA-2.5', name: 'Multimetro', description: 'Multimetro - 1999C-CC- NVC -DP2M - EC', brand: 'Unit', model: 'ZD-180', initialStock: 3, currentStock: 3 },
+  { id: '17-0, 8-60/4OHY', name: 'Malla Desoldante', description: 'Malla Desoldante - 2.5 mm', brand: '', model: '', initialStock: 2, currentStock: 2 },
+  { id: '100-0,8 - 63/37ME', name: 'Estaño', description: 'Estaño - Tubo - 0,8 mm -60/40-17g', brand: '', model: '', initialStock: 1, currentStock: 1 },
+  { id: '1060', name: 'Estaño', description: 'Estaño Rollo - 0,8 mm-63/37 - 100g', brand: '', model: '', initialStock: 1, currentStock: 1 },
+  { id: '3613', name: 'Toner', description: 'Toner Alt Brother TN 1060', brand: 'Noga', model: '', initialStock: 1, currentStock: 1 },
+  { id: 'N/A-1', name: 'Pilas', description: 'Pilas CR 2032', brand: '', model: '', initialStock: 10, currentStock: 10 },
+  { id: 'N/A-2', name: 'Tester', description: 'Tester Digital con Medidor de Temperatura', brand: 'NetMark', model: '', initialStock: 1, currentStock: 1 }
+];
