@@ -25,7 +25,7 @@ ENV PORT=3000
 
 # Copy package files and install production dependencies
 COPY package*.json ./
-RUN if [ -f package-lock.json ]; then npm ci --only=production; else npm install --omit=dev; fi
+RUN if [ -f package-lock.json ]; then npm ci --omit=dev; else npm install --omit=dev; fi
 
 # Copy compiled dist folder from builder stage
 COPY --from=builder /app/dist ./dist
