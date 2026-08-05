@@ -6,9 +6,10 @@ interface HeaderProps {
   activeSession: AccessLog | null;
   onOpenLoginModal: () => void;
   onLogout: () => void;
+  onOpenManual?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ activeSession, onOpenLoginModal, onLogout }) => {
+const Header: React.FC<HeaderProps> = ({ activeSession, onOpenLoginModal, onLogout, onOpenManual }) => {
     return (
         <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
             <div className="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -28,6 +29,17 @@ const Header: React.FC<HeaderProps> = ({ activeSession, onOpenLoginModal, onLogo
 
                 {/* User Session Bar */}
                 <div className="flex flex-wrap items-center gap-3">
+                    {onOpenManual && (
+                        <button
+                            onClick={onOpenManual}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800 text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-98"
+                            title="Abrir Manual del Usuario"
+                        >
+                            <span>📘</span>
+                            <span>Manual del Usuario</span>
+                        </button>
+                    )}
+
                     {activeSession ? (
                         <div className="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/80 p-2 pl-3.5 pr-2 rounded-2xl border border-gray-200 dark:border-gray-600">
                             <div className="flex flex-col text-right sm:text-left">
