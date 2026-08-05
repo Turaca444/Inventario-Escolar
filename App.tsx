@@ -13,7 +13,6 @@ import FraudHistory from './components/FraudHistory';
 import GeminiAISearch from './components/GeminiAISearch';
 import UserLoginModal from './components/UserLoginModal';
 import UserManualModal from './components/UserManualModal';
-import AlertModal, { type SystemAlert } from './components/AlertModal';
 import LoanModal from './components/LoanModal';
 import AddItemModal from './components/AddItemModal';
 import EditItemModal from './components/EditItemModal';
@@ -153,37 +152,6 @@ const loadFraudReportsFromStorage = (): FraudReport[] => {
     return initialSampleFraudReports;
 };
 
-const initialSampleAlerts: SystemAlert[] = [
-  {
-    id: 'alert-sample-1',
-    createdAt: new Date(Date.now() - 3600000 * 2),
-    type: 'Falla / Avería de Equipo',
-    priority: 'Alta',
-    location: 'Laboratorio de Electrónica',
-    description: 'Osciloscopio digital presenta intermitencia de encendido y señal inestable en canal CH1.',
-    itemName: 'Osciloscopio Digital 100MHz',
-    reportedBy: 'Carlos Gómez',
-    reporterRole: 'Preceptor',
-    status: 'Activa',
-  }
-];
-
-const loadAlertsFromStorage = (): SystemAlert[] => {
-    try {
-        const stored = localStorage.getItem('systemAlerts');
-        if (stored) {
-            return JSON.parse(stored).map((a: any) => ({
-                ...a,
-                createdAt: new Date(a.createdAt),
-                resolvedAt: a.resolvedAt ? new Date(a.resolvedAt) : undefined,
-            }));
-        }
-    } catch (error) {
-        console.error("Error al cargar alertas del sistema:", error);
-    }
-    return initialSampleAlerts;
-};
-
 
 const ConfirmDeleteModal: React.FC<{
   isOpen: boolean;
@@ -276,7 +244,6 @@ const App: React.FC = () => {
     const [deletedItems, setDeletedItems] = useState<DeletedItemLog[]>(loadDeletedItemsFromStorage);
     const [accessLogs, setAccessLogs] = useState<AccessLog[]>(loadAccessLogsFromStorage);
     const [fraudReports, setFraudReports] = useState<FraudReport[]>(loadFraudReportsFromStorage);
-    const [alerts, setAlerts] = useState<SystemAlert[]>(loadAlertsFromStorage);
     const [activeSession, setActiveSession] = useState<AccessLog | null>(loadActiveSessionFromStorage);
 
     // Persistence effects
@@ -287,14 +254,6 @@ const App: React.FC = () => {
             console.error("Error al guardar inventario:", error);
         }
     }, [inventory]);
-
-    useEffect(() => {
-        try {
-            localStorage.setItem('systemAlerts', JSON.stringify(alerts));
-        } catch (error) {
-            console.error("Error al guardar alertas del sistema:", error);
-        }
-    }, [alerts]);
 
     useEffect(() => {
         try {
@@ -347,34 +306,9 @@ const App: React.FC = () => {
     // Modals state
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isManualOpen, setIsManualOpen] = useState(false);
-    const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
     const [isFraudModalOpen, setIsFraudModalOpen] = useState(false);
     const [isLoanModalOpen, setIsLoanModalOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
-
-    const activeAlertsCount = alerts.filter((a) => a.status === 'Activa').length;
-
-    const handleAddAlert = (newAlert: Omit<SystemAlert, 'id' | 'createdAt' | 'status'>) => {
-        const alert: SystemAlert = {
-            ...newAlert,
-            id: `alert-${Date.now()}`,
-            createdAt: new Date(),
-            status: 'Activa',
-        };
-        setAlerts((prev) => [alert, ...prev]);
-        setToast({ message: '🚨 Alerta del sistema emitida con éxito', type: 'success' });
-    };
-
-    const handleResolveAlert = (alertId: string, resolvedBy: string) => {
-        setAlerts((prev) =>
-            prev.map((a) =>
-                a.id === alertId
-                    ? { ...a, status: 'Resuelta', resolvedAt: new Date(), resolvedBy }
-                    : a
-            )
-        );
-        setToast({ message: '✅ Alerta marcada como resuelta', type: 'success' });
-    };
 
     const [isAddItemModalOpen, setIsAddItemModalOpen] = useState(false);
     
@@ -751,36 +685,9 @@ const App: React.FC = () => {
                 onOpenLoginModal={() => setIsLoginModalOpen(true)}
                 onLogout={handleLogout}
                 onOpenManual={() => setIsManualOpen(true)}
-                onOpenAlertModal={() => setIsAlertModalOpen(true)}
-                activeAlertsCount={activeAlertsCount}
             />
 
             <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-                
-                {/* Active Alerts Banner */}
-                {activeAlertsCount > 0 && (
-                    <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3 animate-fade-in">
-                        <div className="flex items-center space-x-3">
-                            <div className="p-2.5 bg-white/20 rounded-xl text-xl animate-bounce">
-                                🚨
-                            </div>
-                            <div>
-                                <h4 className="font-extrabold text-sm sm:text-base">
-                                    Atención: Hay {activeAlertsCount} {activeAlertsCount === 1 ? 'alerta activa' : 'alertas activas'} en el sistema
-                                </h4>
-                                <p className="text-xs text-red-100">
-                                    {alerts.find((a) => a.status === 'Activa')?.type} en {alerts.find((a) => a.status === 'Activa')?.location}: &quot;{alerts.find((a) => a.status === 'Activa')?.description}&quot;
-                                </p>
-                            </div>
-                        </div>
-                        <button
-                            onClick={() => setIsAlertModalOpen(true)}
-                            className="px-4 py-2 bg-white text-red-700 font-bold text-xs sm:text-sm rounded-xl shadow hover:bg-red-50 transition-all shrink-0 hover:scale-102 active:scale-98"
-                        >
-                            Ver / Emitir Alertas 🚨
-                        </button>
-                    </div>
-                )}
                 
                 {/* Navigation Bar / Section Switcher */}
                 <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 dark:border-gray-700 pb-4">
@@ -839,23 +746,6 @@ const App: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        <button
-                            onClick={() => setIsAlertModalOpen(true)}
-                            className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-98 relative ${
-                                activeAlertsCount > 0
-                                    ? 'bg-red-600 text-white shadow-md shadow-red-500/30 animate-pulse'
-                                    : 'bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-900/60 border border-red-200 dark:border-red-800/80'
-                            }`}
-                            title="Emitir o revisar alertas del sistema"
-                        >
-                            <span>🚨</span>
-                            <span>Botón de Alerta</span>
-                            {activeAlertsCount > 0 && (
-                                <span className="ml-1 px-1.5 py-0.2 bg-white text-red-700 text-[10px] font-black rounded-full">
-                                    {activeAlertsCount}
-                                </span>
-                            )}
-                        </button>
                         <button
                             onClick={() => setIsManualOpen(true)}
                             className="inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800/80 text-xs sm:text-sm font-bold rounded-xl transition-all hover:scale-102 active:scale-98"
@@ -953,16 +843,6 @@ const App: React.FC = () => {
             </main>
 
             {/* Modals */}
-            <AlertModal
-                isOpen={isAlertModalOpen}
-                onClose={() => setIsAlertModalOpen(false)}
-                activeSession={activeSession}
-                inventory={inventory}
-                alerts={alerts}
-                onAddAlert={handleAddAlert}
-                onResolveAlert={handleResolveAlert}
-            />
-
             <UserManualModal
                 isOpen={isManualOpen}
                 onClose={() => setIsManualOpen(false)}

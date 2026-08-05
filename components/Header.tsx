@@ -7,8 +7,6 @@ interface HeaderProps {
   onOpenLoginModal: () => void;
   onLogout: () => void;
   onOpenManual?: () => void;
-  onOpenAlertModal?: () => void;
-  activeAlertsCount?: number;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -16,8 +14,6 @@ const Header: React.FC<HeaderProps> = ({
   onOpenLoginModal,
   onLogout,
   onOpenManual,
-  onOpenAlertModal,
-  activeAlertsCount = 0,
 }) => {
     return (
         <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
@@ -38,26 +34,6 @@ const Header: React.FC<HeaderProps> = ({
 
                 {/* User Session Bar */}
                 <div className="flex flex-wrap items-center gap-2.5">
-                    {onOpenAlertModal && (
-                        <button
-                            onClick={onOpenAlertModal}
-                            className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-98 relative ${
-                                activeAlertsCount > 0
-                                    ? 'bg-red-600 text-white shadow-md shadow-red-500/30 animate-pulse'
-                                    : 'bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-900/60 border border-red-200 dark:border-red-800/80'
-                            }`}
-                            title="Emitir o revisar alertas del sistema"
-                        >
-                            <span>🚨</span>
-                            <span>Botón de Alerta</span>
-                            {activeAlertsCount > 0 && (
-                                <span className="ml-1 px-1.5 py-0.2 bg-white text-red-700 text-[10px] font-black rounded-full">
-                                    {activeAlertsCount}
-                                </span>
-                            )}
-                        </button>
-                    )}
-
                     {onOpenManual && (
                         <button
                             onClick={onOpenManual}
