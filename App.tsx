@@ -685,7 +685,6 @@ const App: React.FC = () => {
                 onOpenLoginModal={() => setIsLoginModalOpen(true)}
                 onLogout={handleLogout}
                 onOpenManual={() => setIsManualOpen(true)}
-                onOpenFraudModal={() => setIsFraudModalOpen(true)}
             />
 
             <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
@@ -757,14 +756,6 @@ const App: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
-                        <button
-                            onClick={() => setIsFraudModalOpen(true)}
-                            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/60 border border-amber-200 dark:border-amber-800/80 text-xs sm:text-sm font-bold rounded-xl transition-all hover:scale-102 active:scale-98"
-                            title="Emitir o reportar un incidente de fraude"
-                        >
-                            <span>⚠️</span>
-                            <span>Reportar Fraude</span>
-                        </button>
                         <button
                             onClick={() => setIsManualOpen(true)}
                             className="inline-flex items-center gap-1.5 px-3.5 py-2.5 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800/80 text-xs sm:text-sm font-bold rounded-xl transition-all hover:scale-102 active:scale-98"
