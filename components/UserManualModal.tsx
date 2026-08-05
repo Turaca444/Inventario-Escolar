@@ -56,6 +56,11 @@ const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClose }) =>
           description: 'Despliega la bitácora de control de asistencia de Preceptores y Administradores con sus tiempos de inicio y fin de turno.',
         },
         {
+          name: '🚨 Botón de Alerta',
+          location: 'Encabezado superior y Barra de Acciones',
+          description: 'Abre la ventana de Alertas e Incidencias en tiempo real. Permite emitir notificaciones urgentes sobre fallas de equipos, pérdidas, emergencias de laboratorio o daños en la infraestructura, asignando un nivel de prioridad.',
+        },
+        {
           name: '📘 Manual del Usuario',
           location: 'Encabezado / Barra superior',
           description: 'Abre este documento explicativo interactivo sobre el funcionamiento de cada botón y herramienta de la plataforma.',
