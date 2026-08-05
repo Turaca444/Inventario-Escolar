@@ -735,16 +735,7 @@ const App: React.FC = () => {
                         >
                             ⏰ Ingresos ({accessLogs.length})
                         </button>
-                        <button
-                            onClick={() => setActiveTab('fraud')}
-                            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                                activeTab === 'fraud'
-                                    ? 'bg-red-600 text-white shadow-md shadow-red-500/20'
-                                    : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 hover:bg-red-100 dark:hover:bg-red-900/60 border border-red-200 dark:border-red-900/60'
-                            }`}
-                        >
-                            🚨 Fraude ({fraudReports.length})
-                        </button>
+
                     </div>
 
                     <div className="flex items-center gap-2">
