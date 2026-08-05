@@ -73,26 +73,26 @@ const initialSampleLogs: AccessLog[] = [
         loginTime: new Date(Date.now() - 3600000 * 5),
         logoutTime: new Date(Date.now() - 3600000 * 2),
         status: 'Finalizado',
-    },
-    {
-        id: 'log-sample-2',
-        firstName: 'María',
-        lastName: 'Fernández',
-        role: 'Preceptor',
-        loginTime: new Date(Date.now() - 3600000 * 2),
-        status: 'Activo',
     }
 ];
+
+const isMariaFernandez = (firstName: string, lastName: string) => {
+    const full = `${firstName} ${lastName}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return full.includes('maria') && full.includes('fernandez');
+};
 
 const loadAccessLogsFromStorage = (): AccessLog[] => {
     try {
         const storedLogs = localStorage.getItem('accessLogs');
         if (storedLogs) {
-            return JSON.parse(storedLogs).map((log: any) => ({
+            const parsed: AccessLog[] = JSON.parse(storedLogs).map((log: any) => ({
                 ...log,
                 loginTime: new Date(log.loginTime),
                 logoutTime: log.logoutTime ? new Date(log.logoutTime) : undefined,
             }));
+            const filtered = parsed.filter(log => !isMariaFernandez(log.firstName, log.lastName));
+            localStorage.setItem('accessLogs', JSON.stringify(filtered));
+            return filtered;
         }
     } catch (error) {
         console.error("Error al cargar registros de acceso:", error);
@@ -105,6 +105,10 @@ const loadActiveSessionFromStorage = (): AccessLog | null => {
         const storedSession = localStorage.getItem('activeSession');
         if (storedSession) {
             const parsed = JSON.parse(storedSession);
+            if (isMariaFernandez(parsed.firstName, parsed.lastName)) {
+                localStorage.removeItem('activeSession');
+                return null;
+            }
             return {
                 ...parsed,
                 loginTime: new Date(parsed.loginTime),
