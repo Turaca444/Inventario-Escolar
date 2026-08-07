@@ -56,6 +56,11 @@ const UserManualModal: React.FC<UserManualModalProps> = ({ isOpen, onClose }) =>
           description: 'Despliega la bitácora de control de asistencia de Preceptores y Administradores con sus tiempos de inicio y fin de turno.',
         },
         {
+          name: '⚠️ Reportar Fraude',
+          location: 'Encabezado / Barra superior y Acciones',
+          description: 'Abre el formulario de reporte de fraude o sustracción de equipos, permitiendo registrar detalles de la irregularidad y generar un acta en PDF.',
+        },
+        {
           name: '📘 Manual del Usuario',
           location: 'Encabezado / Barra superior',
           description: 'Abre este documento explicativo interactivo sobre el funcionamiento de cada botón y herramienta de la plataforma.',

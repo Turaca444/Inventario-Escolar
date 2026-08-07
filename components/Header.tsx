@@ -7,6 +7,7 @@ interface HeaderProps {
   onOpenLoginModal: () => void;
   onLogout: () => void;
   onOpenManual?: () => void;
+  onOpenFraudModal?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -14,6 +15,7 @@ const Header: React.FC<HeaderProps> = ({
   onOpenLoginModal,
   onLogout,
   onOpenManual,
+  onOpenFraudModal,
 }) => {
     return (
         <header className="bg-white dark:bg-gray-800 shadow-md border-b border-gray-200 dark:border-gray-700">
@@ -34,6 +36,17 @@ const Header: React.FC<HeaderProps> = ({
 
                 {/* User Session Bar */}
                 <div className="flex flex-wrap items-center gap-2.5">
+                    {onOpenFraudModal && (
+                        <button
+                            onClick={onOpenFraudModal}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/60 border border-amber-200 dark:border-amber-800/80 text-xs sm:text-sm font-bold transition-all hover:scale-102 active:scale-98"
+                            title="Reportar incidente de fraude o sustracción"
+                        >
+                            <span>⚠️</span>
+                            <span>Reportar Fraude</span>
+                        </button>
+                    )}
+
                     {onOpenManual && (
                         <button
                             onClick={onOpenManual}
